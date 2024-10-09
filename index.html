@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wenns juckt dann krank!</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-size: 2em;
+        }
+
+        #juckt {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #krank {
+            display: none;
+            color: black;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        #loadingScreen {
+            display: none;
+            /* Initially hidden */
+            width: 560px;
+            height: 315px;
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            margin-top: 20px;
+            font-size: inherit;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        #videoContainer {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #loadButton {
+            padding: 15px 30px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: inherit;
+        }
+
+        #loadButton:hover {
+            background-color: #0056b3;
+        }
+
+        #loadButton:active {
+            background-color: #004080;
+        }
+
+        /* Spinner styles */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #090a0c;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="pug.jpeg" alt="Pug" width="560px">
+    <div id="juckt">Juckts?</div>
+    <button id="loadButton">Ja!</button>
+    <div id="krank">Oh nein, du bist krank!</div>
+    <div id="loadingScreen">
+        <p>Generiere AU<br>(Körper nicht frei beweglich)</p>
+        <div class="spinner"></div>
+    </div>
+    <div id="videoContainer">
+        <iframe id="videoFrame" width="560" height="315" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <script>
+        document.getElementById('loadButton').addEventListener('click', function () {
+            document.getElementById('juckt').style.display = 'none';
+            document.getElementById('loadButton').style.display = 'none';
+            document.getElementById('krank').style.display = 'flex';
+
+            setTimeout(function () {
+                document.getElementById('loadingScreen').style.display = 'flex';
+            }, 500); // 1 second delay
+            setTimeout(function () {
+                document.getElementById('videoContainer').style.display = 'block';
+                document.getElementById('loadingScreen').style.display = 'none';
+                document.getElementById('videoFrame').src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1";
+            }, 3500); // 3 seconds delay
+        });
+    </script>
+</body>
+
+</html>
